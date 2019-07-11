@@ -151,8 +151,11 @@ func healthcheckHandler() http.Handler {
 func main() {
 	log.Print("Started!")
 	if os.Getenv("POSTGRESQL_URL") != "" {
-		storage = store.NewPostgresqlStore(store.NewPostgresqlClient(os.Getenv("POSTGRESQL_URL")))
-		log.Println("Using postgresql storage:", os.Getenv("POSTGRESQL_URL"))
+
+		log.Print("Postgres is disabled for now due to a compilation issue in docker (and maybe locally).")
+
+		// storage = store.NewPostgresqlStore(store.NewPostgresqlClient(os.Getenv("POSTGRESQL_URL")))
+		// log.Println("Using postgresql storage:", os.Getenv("POSTGRESQL_URL"))
 	} else if os.Getenv("REDIS_URI") != "" {
 		storage = store.NewRedisStore(store.NewRedisClient(os.Getenv("REDIS_URI"), os.Getenv("REDIS_PASSWORD")))
 		log.Println("Using redis storage:", os.Getenv("REDIS_URI"))
